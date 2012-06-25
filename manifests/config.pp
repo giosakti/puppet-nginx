@@ -52,8 +52,8 @@ class nginx::config inherits nginx::params {
 	}
 	
 	file { "${nginx::params::nx_conf_dir}/conf.d/proxy.conf":
-	    ensure  => file,
-	    content => template('nginx/conf.d/proxy.conf.erb'),
+	  ensure  => file,
+	  content => template('nginx/conf.d/proxy.conf.erb'),
 	}
 	
 	file { "${nginx::config::nx_temp_dir}/nginx.d":
