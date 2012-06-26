@@ -27,8 +27,8 @@
 #	 }
 
 define nginx::resource::upstream (
-	$ensure 	= 'present',
-	$members,
+	$ensure = 'present',
+	$members = undef,
 	$socket
 ){
 	File { 

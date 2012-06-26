@@ -3,4 +3,6 @@ server {
   <% # check to see if ipv6 support exists in the kernel before applying %>
   <% if ipv6_enable == 'true' && (defined? ipaddress6) %>listen [<%= ipv6_listen_ip %>]:<%= ipv6_listen_port %> default ipv6only=on;<% end %>
   server_name <%= name %>;
-  access_log  <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.access.log;
+  
+  <% if root %>root <%= root %>;<% end %>
+  <% if try_files %>try_files <%= try_files %>;<% end %>

@@ -1,1 +1,7 @@
+  <% if client_max_body_size %>client_max_body_size <%= client_max_body_size %>;<% end %>
+  <% if keepalive_timeout %>keepalive_timeout <%= keepalive_timeout %>;<% end %>
+  error_page <% error_pages.each do |i| %> <%= i %><% end %>; 
+
+  access_log <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.access.log main;
+  error_log <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.error.log info;
 }

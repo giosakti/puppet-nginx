@@ -31,18 +31,24 @@
 #    ssl_key  => '/tmp/server.pem',
 #  }
 define nginx::resource::vhost(
-	$ensure           = 'enable',
-	$listen_ip        = '*',
-	$listen_port      = '80',
-	$ipv6_enable      = 'false',
-	$ipv6_listen_ip   = '::',
-	$ipv6_listen_port = '80',
-	$ssl              = 'false',
-	$ssl_cert         = undef,
-	$ssl_key          = undef,
-    $proxy            = undef,
-	$index_files      = ['index.html', 'index.htm', 'index.php'],
-	$www_root         = undef
+	$ensure           		= 'enable',
+	$listen_ip        		= '*',
+	$listen_port      		= '80',
+	$ipv6_enable      		= 'false',
+	$ipv6_listen_ip   		= '::',
+	$ipv6_listen_port 		= '80',
+	$location							= '/',
+	$root 								= undef,
+	$try_files						= undef,
+	$client_max_body_size = undef,
+	$keepalive_timeout 		= undef,
+	$error_pages					= ["500", "502", "503", "504", "/500.html"],
+	$ssl              		= 'false',
+	$ssl_cert         		= undef,
+	$ssl_key          		= undef,
+	$proxy            		= undef,
+	$index_files      		= ['index.html', 'index.htm', 'index.php'],
+	$www_root         		= undef
 ) {
 	
 	File { 
@@ -80,7 +86,7 @@ define nginx::resource::vhost(
 		ensure	     => $ensure,
 		vhost        => $name,
 		ssl          => $ssl,
-		location	 => '/', 	
+		location	 => $location,
 		proxy		 => $proxy,
 		www_root	 => $www_root,
 		notify		 => Class['nginx::service'],
